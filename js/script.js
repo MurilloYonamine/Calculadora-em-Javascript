@@ -84,10 +84,13 @@ function Calculator() {
 
   const clearDisplay = () => (display.value = "");
   const deleteOne = () => (display.value = display.value.slice(0, -1));
-  const btnToDisplay = (valor) => (display.value += valor);
+  const btnToDisplay = (valor) => {
+    display.value += valor;
+    display.focus();
+  };
 
   const pressEnter = () => {
-    display.addEventListener("keyup", (e) => {
+    display.addEventListener("keypress", (e) => {
       if (e.keyCode === 13) {
         calculation();
       }
