@@ -82,6 +82,10 @@ function Calculator() {
     pressEnter();
   };
 
+  const clearDisplay = () => (display.value = "");
+  const deleteOne = () => (display.value = display.value.slice(0, -1));
+  const btnToDisplay = (valor) => (display.value += valor);
+
   const pressEnter = () => {
     display.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
@@ -89,15 +93,6 @@ function Calculator() {
       }
     });
   };
-
-  const clearDisplay = () => {
-    display.value = "";
-  };
-
-  const deleteOne = () => {
-    display.value = display.value.slice(0, -1);
-  };
-
   const calculation = () => {
     let calc = display.value;
     try {
@@ -115,32 +110,18 @@ function Calculator() {
       return;
     }
   };
-
   const clickButton = () => {
-    document.addEventListener("click", (e) => {
-      const el = e.target;
-      if (el.classList.contains("btn-num")) {
-        btnToDisplay(el.innerText);
-      }
+    document.addEventListener("click", (event) => {
+      const el = event.target;
+      if (el.classList.contains("btn-num")) btnToDisplay(el.innerText);
 
-      if (el.classList.contains("btn-clear")) {
-        clearDisplay();
-      }
+      if (el.classList.contains("btn-clear")) clearDisplay();
 
-      if (el.classList.contains("btn-del")) {
-        deleteOne();
-      }
+      if (el.classList.contains("btn-del")) deleteOne();
 
-      if (el.classList.contains("btn-eq")) {
-        calculation();
-      }
+      if (el.classList.contains("btn-eq")) calculation();
     });
   };
-
-  const btnToDisplay = (valor) => {
-    display.value += valor;
-  };
 }
-
 const calculator = new Calculator();
 calculator.start();
